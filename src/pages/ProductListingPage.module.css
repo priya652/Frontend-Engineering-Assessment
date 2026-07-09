@@ -1,0 +1,157 @@
+.layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.sidebar {
+  position: sticky;
+  /* Sits below the sticky navbar and scrolls independently. */
+  top: calc(var(--nav-height) + var(--space-6));
+  max-height: calc(100vh - var(--nav-height) - var(--space-10));
+  overflow-y: auto;
+}
+
+.main {
+  min-width: 0;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.filterToggle {
+  display: none;
+  position: relative;
+}
+
+.dot {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  border: 2px solid var(--color-page);
+}
+
+.count {
+  flex: 1;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.count strong {
+  color: var(--color-text);
+}
+
+.pageOf {
+  color: var(--color-text-subtle);
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.sortLabel {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.select {
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+/* --- Mobile drawer --- */
+.drawerRoot {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-drawer);
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.5);
+  animation: fade 180ms ease;
+}
+
+.drawer {
+  position: absolute;
+  inset: 0 auto 0 0;
+  display: flex;
+  flex-direction: column;
+  width: min(86vw, 320px);
+  background: var(--color-surface);
+  overflow-y: auto;
+  animation: slideIn 220ms ease;
+}
+
+.drawer > div:first-child {
+  flex: 1;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.drawerFooter {
+  position: sticky;
+  bottom: 0;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .filterToggle {
+    display: inline-flex;
+  }
+
+  .sortLabel {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .count {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .toolbar {
+    flex-wrap: wrap;
+  }
+}

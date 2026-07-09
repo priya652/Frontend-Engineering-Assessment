@@ -1,0 +1,75 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-1);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  user-select: none;
+}
+
+.row:hover .label {
+  color: var(--color-text);
+}
+
+/* Keep the input focusable and accessible, just not visible. */
+.input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.box {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: #fff;
+  transition: background-color var(--transition), border-color var(--transition);
+}
+
+.input:checked + .box {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.input:focus-visible + .box {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.tick {
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.input:checked + .box .tick {
+  opacity: 1;
+}
+
+.label {
+  flex: 1;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.input:checked ~ .label {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.count {
+  font-size: var(--text-xs);
+  color: var(--color-text-subtle);
+  font-variant-numeric: tabular-nums;
+}
