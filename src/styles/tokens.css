@@ -69,7 +69,7 @@
   /* Fluid, so browser zoom (which shrinks the effective viewport) narrows the
      sidebar instead of crushing the product grid next to it. */
   --sidebar-width: clamp(208px, 21vw, 264px);
-  --content-max: 1280px;
+  --content-max: 100%;
   --z-nav: 100;
   --z-drawer: 200;
 }
