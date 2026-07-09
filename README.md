@@ -2,6 +2,8 @@
 
 A product listing and detail application built on the [DummyJSON products API](https://dummyjson.com/docs/products).
 
+**Live demo:** https://frontend-engineering-assessment-priya652s-projects.vercel.app
+
 Built with **React 18 + Vite + React Router 6** and hand-written **CSS Modules**. No UI library, no state library, no CSS framework — the brief asked for reusable components and clean structure, so the components and the styling system are the deliverable rather than something imported.
 
 ---
