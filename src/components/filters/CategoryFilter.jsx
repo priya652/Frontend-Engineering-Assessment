@@ -1,5 +1,6 @@
 import Checkbox from '../ui/Checkbox.jsx';
 import Skeleton from '../ui/Skeleton.jsx';
+import FacetList from './FacetList.jsx';
 import FilterSection from './FilterSection.jsx';
 import { titleCase } from '../../utils/format.js';
 import styles from './FilterList.module.css';
@@ -33,8 +34,11 @@ export function CategoryFilter({ categories, selected, onChange, loading, error,
 
   return (
     <FilterSection title="Categories">
-      <div className={`${styles.list} ${styles.scroll}`}>
-        {categories.map(({ slug, name }) => (
+      <FacetList
+        items={categories}
+        initialCount={6}
+        itemLabel="more categories"
+        renderItem={({ slug, name }) => (
           <Checkbox
             key={slug}
             name="category"
@@ -43,8 +47,8 @@ export function CategoryFilter({ categories, selected, onChange, loading, error,
             checked={selected === slug}
             onChange={(checked) => !disabled && onChange(checked ? slug : '')}
           />
-        ))}
-      </div>
+        )}
+      />
     </FilterSection>
   );
 }

@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import Checkbox from '../ui/Checkbox.jsx';
 import Skeleton from '../ui/Skeleton.jsx';
 import TextField from '../ui/TextField.jsx';
+import FacetList from './FacetList.jsx';
 import FilterSection from './FilterSection.jsx';
 import styles from './FilterList.module.css';
 
@@ -66,8 +67,13 @@ export function BrandFilter({ facets, selected, onChange, loading }) {
           {facets.length === 0 ? 'No brands in this selection.' : 'No brand matches that search.'}
         </p>
       ) : (
-        <div className={`${styles.list} ${styles.scroll}`}>
-          {visible.map(({ brand, count }) => (
+        <FacetList
+          items={visible}
+          // While searching, every match should be visible — collapsing the
+          // results the user just searched for would be perverse.
+          initialCount={query.trim() ? visible.length : 6}
+          itemLabel="more brands"
+          renderItem={({ brand, count }) => (
             <Checkbox
               key={brand}
               name="brand"
@@ -77,8 +83,8 @@ export function BrandFilter({ facets, selected, onChange, loading }) {
               checked={selected.includes(brand)}
               onChange={toggle(brand)}
             />
-          ))}
-        </div>
+          )}
+        />
       )}
     </FilterSection>
   );

@@ -5,12 +5,31 @@
   align-items: start;
 }
 
+/*
+ * The sidebar is the only scroll container in the filter column: the facet
+ * lists collapse behind "Show more" rather than scrolling internally. With the
+ * facets collapsed the panel fits the viewport, so no scrollbar appears at all
+ * until the user expands one.
+ *
+ * `overscroll-behavior` stops a scroll gesture that reaches the end of the
+ * sidebar from continuing on to scroll the page behind it.
+ */
 .sidebar {
   position: sticky;
-  /* Sits below the sticky navbar and scrolls independently. */
   top: calc(var(--nav-height) + var(--space-6));
   max-height: calc(100vh - var(--nav-height) - var(--space-10));
   overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: var(--radius-full);
 }
 
 .main {

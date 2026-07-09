@@ -140,6 +140,8 @@ Two real bugs were caught this way and fixed:
 
 A third was fixed on review: `ImageGallery` reset its selected thumbnail via `useEffect` keyed on `title`, which would fail for two products sharing a title. It's now keyed by product `id` at the call site, so React remounts it and the effect isn't needed at all.
 
+A fourth surfaced only once the app was open in a browser, which is a fair reminder that a passing build proves nothing about layout. The sidebar had `max-height` + `overflow-y: auto`, and *inside* it each facet list had its own `max-height: 216px; overflow-y: auto` — **a scroll container nested in a scroll container**. The outer scrollbar ended up with a few pixels of travel and no obvious content to reveal, and the two scrollbars sat millimetres apart. The facet lists now collapse behind a "Show more" toggle (`FacetList`), which makes the sidebar the single scroll owner and, with the facets collapsed, means it needs no scrollbar at all until the user expands one. The lesson generalises: capping a list's height *looks* tidier than collapsing it, but it costs a scroll container, and scroll containers do not nest gracefully.
+
 ---
 
 ## What I'd do next
